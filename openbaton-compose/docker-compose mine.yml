@@ -32,7 +32,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:rw
   nfvo_database:
-    image: mysql/mysql-server:5.7.20
+    image: mysql/mysql-server
     environment:
       - MYSQL_RANDOM_ROOT_PASSWORD=true
       - MYSQL_DATABASE=openbaton
