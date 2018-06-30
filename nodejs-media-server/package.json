@@ -1,0 +1,34 @@
+{
+  "name": "rc-car-webclient",
+  "version": "0.1.0",
+  "description": "Remote control for toy car using gRPC",
+  "main": "server.js",
+  "dependencies": {
+    "child_process": "^1.0.2",
+    "express": "^4.16.3",
+    "fs": "0.0.1-security",
+    "http": "0.0.0",
+    "net": "^1.0.2",
+    "nodemon": "^1.17.5",
+    "path": "^0.12.7",
+    "require": "^2.4.20"
+  },
+  "devDependencies": {
+    "webpack-cli": "^3.0.3"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "webpack && npm start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danieldimit/openbaton-video-caching-ns"
+  },
+  "author": "Daniel Dimitrov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danieldimit/openbaton-video-caching-ns/issues"
+  },
+  "homepage": "https://github.com/danieldimit/openbaton-video-caching-ns#readme"
+}
