@@ -57,3 +57,6 @@ atlassian-ide-plugin.xml
 # Docker compose left overs
 
 *dbdata*
+
+*/node_modules
+*/package-lock.json
