@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  origin_server:
+    build: nodejs-media-server
+    ports:
+      - "4312:4312"
+  nginx_cache:
+    build: nginx-internal-caching
+    depends_on:
+      - origin_server
+    ports:
+      - "83:80"
+      - "84:82"

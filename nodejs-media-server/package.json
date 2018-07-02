@@ -1,7 +1,7 @@
 {
-  "name": "rc-car-webclient",
+  "name": "origin-server",
   "version": "0.1.0",
-  "description": "Remote control for toy car using gRPC",
+  "description": "Origin server, serving video file and an html page.",
   "main": "server.js",
   "dependencies": {
     "child_process": "^1.0.2",
@@ -18,7 +18,7 @@
   },
   "scripts": {
     "start": "node server.js",
-    "dev": "webpack && npm start",
+    "dev": "npm start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
