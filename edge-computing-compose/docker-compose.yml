@@ -26,3 +26,12 @@ services:
     ports:
       - "87:80"
       - "88:82"
+  nginx_lb:
+    build: lb-tier
+    depends_on:
+      - origin_server
+      - nginx_cache_3
+      - nginx_cache_2
+      - nginx_cache_1
+    ports:
+      - "89:82"
