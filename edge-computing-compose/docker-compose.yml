@@ -8,21 +8,21 @@ services:
   nginx_cache_1:
     build: cache-tier
     depends_on:
-      - origin-server
+      - origin_server
     ports:
       - "83:80"
       - "84:82"
   nginx_cache_2:
     build: cache-tier
     depends_on:
-      - origin-server
+      - origin_server
     ports:
       - "85:80"
       - "86:82"
   nginx_cache_3:
     build: cache-tier
     depends_on:
-      - origin-server
+      - origin_server
     ports:
       - "87:80"
       - "88:82"
