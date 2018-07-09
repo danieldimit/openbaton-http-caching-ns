@@ -1,12 +1,12 @@
 {
-  "name": "docker Iperf",
+  "name": "docker nginx external caching",
   "vendor": "fokus",
   "version": "0.1-ALPHA",
   "vld": [{
     "name": "new-network"
   }],
   "vnfd": [{
-    "name": "server",
+    "name": "nginx_cache_1",
     "vendor": "TUB",
     "version": "0.2",
     "lifecycle_event": [
@@ -17,16 +17,16 @@
       "name": "server-configuration"
     },
     "virtual_link": [{
-      "name": "new-network"
+      "name": "nginx-network"
     }],
     "vdu": [{
       "vm_image": [
-        "iperfserver:latest"
+        "nginx_cache:latest"
       ],
       "scale_in_out": 2,
       "vnfc": [{
         "connection_point": [{
-          "virtual_link_reference": "new-network"
+          "virtual_link_reference": "nginx-network"
         }]
       }]
     }],
@@ -36,7 +36,7 @@
     "type": "server",
     "endpoint": "docker"
   }, {
-    "name": "client",
+    "name": "nginx_cache_2",
     "vendor": "TUB",
     "version": "0.2",
     "lifecycle_event": [
@@ -47,16 +47,76 @@
       "name": "server-configuration"
     },
     "virtual_link": [{
-      "name": "new-network"
+      "name": "nginx-network"
     }],
     "vdu": [{
       "vm_image": [
-        "iperfclient:latest"
+        "nginx_cache:latest"
       ],
       "scale_in_out": 2,
       "vnfc": [{
         "connection_point": [{
-          "virtual_link_reference": "new-network"
+          "virtual_link_reference": "nginx-network"
+        }]
+      }]
+    }],
+    "deployment_flavour": [{
+      "flavour_key": "m1.small"
+    }],
+    "type": "server",
+    "endpoint": "docker"
+  }, {
+    "name": "nginx_cache_3",
+    "vendor": "TUB",
+    "version": "0.2",
+    "lifecycle_event": [
+
+    ],
+    "configurations": {
+      "configurationParameters": [],
+      "name": "server-configuration"
+    },
+    "virtual_link": [{
+      "name": "nginx-network"
+    }],
+    "vdu": [{
+      "vm_image": [
+        "nginx_cache:latest"
+      ],
+      "scale_in_out": 2,
+      "vnfc": [{
+        "connection_point": [{
+          "virtual_link_reference": "nginx-network"
+        }]
+      }]
+    }],
+    "deployment_flavour": [{
+      "flavour_key": "m1.small"
+    }],
+    "type": "server",
+    "endpoint": "docker"
+  }, {
+    "name": "nginx_lb_1",
+    "vendor": "TUB",
+    "version": "0.2",
+    "lifecycle_event": [
+
+    ],
+    "configurations": {
+      "configurationParameters": [],
+      "name": "server-configuration"
+    },
+    "virtual_link": [{
+      "name": "nginx-network"
+    }],
+    "vdu": [{
+      "vm_image": [
+        "nginx_lb:latest"
+      ],
+      "scale_in_out": 2,
+      "vnfc": [{
+        "connection_point": [{
+          "virtual_link_reference": "nginx-network"
         }]
       }]
     }],
@@ -68,10 +128,10 @@
   }],
   "vnf_dependency": [{
     "source": {
-      "name": "server"
+      "name": "nginx_cache_1"
     },
     "target": {
-      "name": "client"
+      "name": "nginx_lb_1"
     },
     "parameters": [
       "hostname"
