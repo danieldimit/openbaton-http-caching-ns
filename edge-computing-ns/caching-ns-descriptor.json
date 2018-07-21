@@ -35,7 +35,11 @@
     }],
     "type": "server",
     "endpoint": "docker"
-  }, {
+  }, 
+
+
+
+  {
     "name": "cache-2",
     "vendor": "TUB",
     "version": "0.1",
@@ -65,7 +69,85 @@
     }],
     "type": "server",
     "endpoint": "docker"
-  }, {
+  }, 
+
+
+
+
+
+  {
+    "name": "cache-3",
+    "vendor": "TUB",
+    "version": "0.1",
+    "lifecycle_event": [
+
+    ],
+    "configurations": {
+      "configurationParameters": [],
+      "name": "cache-configuration"
+    },
+    "virtual_link": [{
+      "name": "caching-docker-network"
+    }],
+    "vdu": [{
+      "vm_image": [
+        "http-cache-tier:latest"
+      ],
+      "scale_in_out": 2,
+      "vnfc": [{
+        "connection_point": [{
+          "virtual_link_reference": "caching-docker-network"
+        }]
+      }]
+    }],
+    "deployment_flavour": [{
+      "flavour_key": "m1.small"
+    }],
+    "type": "server",
+    "endpoint": "docker"
+  }, 
+
+
+
+
+
+  {
+    "name": "loadbalancer",
+    "vendor": "TUB",
+    "version": "0.1",
+    "lifecycle_event": [
+
+    ],
+    "configurations": {
+      "configurationParameters": [],
+      "name": "cache-configuration"
+    },
+    "virtual_link": [{
+      "name": "caching-docker-network"
+    }],
+    "vdu": [{
+      "vm_image": [
+        "http-cache-tier:latest"
+      ],
+      "scale_in_out": 2,
+      "vnfc": [{
+        "connection_point": [{
+          "virtual_link_reference": "caching-docker-network"
+        }]
+      }]
+    }],
+    "deployment_flavour": [{
+      "flavour_key": "m1.small"
+    }],
+    "type": "server",
+    "endpoint": "docker"
+  }, 
+
+
+
+
+
+  {
     "name": "origin-server",
     "vendor": "TUB",
     "version": "0.1",
@@ -96,5 +178,51 @@
     "type": "server",
     "endpoint": "docker"
   }],
-  "vnf_dependency": []
+
+
+
+
+
+  "vnf_dependency": [{
+    "source": {
+      "name": "cache-1"
+    },
+    "target": {
+      "name": "loadbalancer"
+    },
+    "parameters": [
+      "hostname"
+    ]
+  }, 
+
+
+
+
+
+  {
+    "source": {
+      "name": "cache-2"
+    },
+    "target": {
+      "name": "loadbalancer"
+    },
+    "parameters": [
+      "hostname"
+    ]
+  }, 
+
+
+
+
+  {
+    "source": {
+      "name": "cache-3"
+    },
+    "target": {
+      "name": "loadbalancer"
+    },
+    "parameters": [
+      "hostname"
+    ]
+  }]
 }
