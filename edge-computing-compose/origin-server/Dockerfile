@@ -7,3 +7,6 @@ RUN npm install
 
 # start app
 CMD ["npm", "start"]
+
+EXPOSE 4312/tcp
+EXPOSE 4312/udp

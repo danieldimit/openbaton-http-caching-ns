@@ -1,32 +1,32 @@
 {
-  "name": "docker Iperf",
+  "name": "Docker Caching Service",
   "vendor": "fokus",
   "version": "0.1-ALPHA",
   "vld": [{
-    "name": "new-network"
+    "name": "caching-docker-network"
   }],
   "vnfd": [{
-    "name": "server",
+    "name": "cache-1",
     "vendor": "TUB",
-    "version": "0.2",
+    "version": "0.1",
     "lifecycle_event": [
 
     ],
     "configurations": {
       "configurationParameters": [],
-      "name": "server-configuration"
+      "name": "cache-configuration"
     },
     "virtual_link": [{
-      "name": "new-network"
+      "name": "caching-docker-network"
     }],
     "vdu": [{
       "vm_image": [
-        "iperfserver:latest"
+        "http-cache-tier:latest"
       ],
       "scale_in_out": 2,
       "vnfc": [{
         "connection_point": [{
-          "virtual_link_reference": "new-network"
+          "virtual_link_reference": "caching-docker-network"
         }]
       }]
     }],
@@ -36,45 +36,65 @@
     "type": "server",
     "endpoint": "docker"
   }, {
-    "name": "client",
+    "name": "cache-2",
     "vendor": "TUB",
-    "version": "0.2",
+    "version": "0.1",
     "lifecycle_event": [
 
     ],
     "configurations": {
       "configurationParameters": [],
-      "name": "server-configuration"
+      "name": "cache-configuration"
     },
     "virtual_link": [{
-      "name": "new-network"
+      "name": "caching-docker-network"
     }],
     "vdu": [{
       "vm_image": [
-        "iperfclient:latest"
+        "http-cache-tier:latest"
       ],
       "scale_in_out": 2,
       "vnfc": [{
         "connection_point": [{
-          "virtual_link_reference": "new-network"
+          "virtual_link_reference": "caching-docker-network"
         }]
       }]
     }],
     "deployment_flavour": [{
       "flavour_key": "m1.small"
     }],
-    "type": "client",
+    "type": "server",
+    "endpoint": "docker"
+  }, {
+    "name": "origin-server",
+    "vendor": "TUB",
+    "version": "0.1",
+    "lifecycle_event": [
+
+    ],
+    "configurations": {
+      "configurationParameters": [],
+      "name": "cache-configuration"
+    },
+    "virtual_link": [{
+      "name": "caching-docker-network"
+    }],
+    "vdu": [{
+      "vm_image": [
+        "origin-server:latest"
+      ],
+      "scale_in_out": 2,
+      "vnfc": [{
+        "connection_point": [{
+          "virtual_link_reference": "caching-docker-network"
+        }]
+      }]
+    }],
+    "deployment_flavour": [{
+      "flavour_key": "m1.small"
+    }],
+    "type": "server",
     "endpoint": "docker"
   }],
-  "vnf_dependency": [{
-    "source": {
-      "name": "server"
-    },
-    "target": {
-      "name": "client"
-    },
-    "parameters": [
-      "hostname"
-    ]
-  }]
+  "vnf_dependency": []
 }
