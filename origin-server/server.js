@@ -50,6 +50,6 @@ app.get("*", function (req, res) {
     res.sendFile(path.join(DIST_DIR, "index.html"));
 });
 
-app.listen(4312, function () {
+app.listen(4313, function () {
     console.log("App listening on port 4312!");
 });
