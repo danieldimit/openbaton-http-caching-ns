@@ -38,8 +38,8 @@ services:
       - MYSQL_DATABASE=openbaton
       - MYSQL_USER=admin
       - MYSQL_PASSWORD=changeme
-    ports:
-      - "3306:3306"
+    volumes:
+      - ./dbdata_nfvo:/var/lib/mysql
   rabbitmq_broker:
     image: rabbitmq:3-management-alpine
     hostname: openbaton-rabbitmq
@@ -49,3 +49,5 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+    volumes:
+      - ./dbdata_rabbit:/var/lib/rabbitmq
