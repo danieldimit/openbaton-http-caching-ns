@@ -6,7 +6,7 @@
     "name": "caching-docker-network"
   }],
   "vnfd": [{
-    "name": "cache-1",
+    "name": "cache1",
     "vendor": "TUB",
     "version": "0.1",
     "lifecycle_event": [
@@ -40,7 +40,7 @@
 
 
   {
-    "name": "cache-2",
+    "name": "cache2",
     "vendor": "TUB",
     "version": "0.1",
     "lifecycle_event": [
@@ -76,7 +76,7 @@
 
 
   {
-    "name": "cache-3",
+    "name": "cache3",
     "vendor": "TUB",
     "version": "0.1",
     "lifecycle_event": [
@@ -127,7 +127,7 @@
     }],
     "vdu": [{
       "vm_image": [
-        "http-cache-tier:latest"
+        "http-lb-tier:latest"
       ],
       "scale_in_out": 2,
       "vnfc": [{
@@ -149,7 +149,22 @@
 
   "vnf_dependency": [{
     "source": {
-      "name": "cache-1"
+      "name": "cache1"
+    },
+    "target": {
+      "name": "loadbalancer"
+    },
+    "parameters": [
+      "hostname"
+    ]
+  }, 
+
+
+
+
+  {
+    "source": {
+      "name": "cache2"
     },
     "target": {
       "name": "loadbalancer"
@@ -165,22 +180,7 @@
 
   {
     "source": {
-      "name": "cache-2"
-    },
-    "target": {
-      "name": "loadbalancer"
-    },
-    "parameters": [
-      "hostname"
-    ]
-  }, 
-
-
-
-
-  {
-    "source": {
-      "name": "cache-3"
+      "name": "cache3"
     },
     "target": {
       "name": "loadbalancer"
